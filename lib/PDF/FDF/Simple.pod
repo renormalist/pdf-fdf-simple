@@ -20,9 +20,9 @@ PDF::FDF::Simple - Read and write (Acrobat) FDF files.
   my $fdfcontent = $fdf->load;
   $fdfcontent = $fdf->load ($fdfstring);
   print $fdf->as_string;
-  print "Corresponding PDF (attribute /F): ".$fdf->target."\n";
+  print "Corresponding PDF (attribute /F): ".$fdf->attribute_file."\n";
   print "IDs (attribute /ID): ";
-  print $_ foreach @{$fdf->id}; print "\n";
+  print $_ foreach @{$fdf->attribute_id}; print "\n";
 
 =head1 DESCRIPTION
 

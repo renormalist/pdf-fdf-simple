@@ -1,3 +1,10 @@
+2005-12-18  Steffen Schwigon  <schwigon@webit.de>
+
+	* 0.10
+
+	* fixed incorrect SYNOPSIS regarding attribute_file and
+	attribute_id; reported by Brian Bay.
+
 2005-11-13  Steffen Schwigon  <schwigon@webit.de>
 
 	* 0.09
