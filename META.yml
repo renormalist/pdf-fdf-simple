@@ -1,0 +1,17 @@
+---
+name: PDF-FDF-Simple
+version: 0.09
+author:
+  - ~
+abstract: ~
+license: perl
+requires:
+  Class::MethodMaker: 0
+  Parse::RecDescent: 1.94
+  Test::More: 0
+  perl: 5.6.1
+provides:
+  PDF::FDF::Simple:
+    file: lib/PDF/FDF/Simple.pm
+    version: 0.09
+generated_by: Module::Build version 0.23

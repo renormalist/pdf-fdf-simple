@@ -1,0 +1,88 @@
+2005-11-13  Steffen Schwigon  <schwigon@webit.de>
+
+	* 0.09
+
+	* fixed parsing file attribute (/F couldn't handle real world
+	filenames with spaces and parens); reported by Ed Cole
+
+2005-11-10  Steffen Schwigon  <schwigon@webit.de>
+
+	* 0.08
+
+	* fixed parsing fields with missing values (missing /V in fdf);
+	reported by Ed Cole.
+
+	* save now also accepts an explicit filename argument
+
+2005-08-02  Steffen Schwigon  <schwigon@webit.de>
+
+	* 0.07
+
+	* Test::Distribution and Test::Pod::Coverage only used if
+	explicitely required, because I don't want to fail remote
+	installation due to those modules, which might change in future.
+
+2005-06-03  Steffen Schwigon  <schwigon@webit.de>
+
+	* 0.06
+
+	* The Parser now also works without initial version header in FDF
+	file. This seems to be needed in FDFs that were submitted from
+	Acrobat to an URL (e.g., a CGI script); reported by Christopher P
+	Crawford.
+
+	* undefined values are converted into empty strings ('') when fdf
+	is generated (and/or saved), to avoid "uninitialized value"
+	warnings. To avoid this, set option "skip_undefined_fields" to a
+	true value (default is false); then fields whose value is
+	undefined are skipped.
+
+	* Test framework now uses Test::More (plus Test::Pod::Coverage and
+	Test::Distribution if available).
+
+2004-10-22  Steffen Schwigon  <schwigon@webit.de>
+
+	* More speed changes
+
+	* Version 0.05, because of wrong place of 0.04-files in my CPAN dir
+
+2004-10-21  Steffen Schwigon  <schwigon@webit.de>
+
+	* speedup grammar by about 45%
+
+	* attribute_file() and attribute_id() for getting/setting
+	the /F and /ID attributes as suggested by David Thomas.
+
+	* parser extension that reflects those attributes
+
+	* tests
+
+	* parsing of content in blocks of "non-problematic" characters.
+	This gives less "Deep recursion" warnings.
+
+	* Version 0.04
+
+2004-08-10  Steffen Schwigon  <schwigon@webit.de>
+
+	* as_string() method
+
+	* Version 0.03
+
+2004-05-21  Steffen Schwigon  <schwigon@webit.de>
+
+	* Doc minor cleanup
+
+2004-05-21  Steffen Schwigon  <schwigon@webit.de>
+
+	* Renamed to PDF::FDF::Simple
+
+	* Parser fixes with newline handling
+
+	* Version 0.02
+
+2004-05-17  Steffen Schwigon  <schwigon@webit.de>
+
+	* first official version
+	
+	* Version 0.01
+	
