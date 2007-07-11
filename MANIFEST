@@ -9,6 +9,8 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 META.yml
 README
+t/acro8.t
+t/acro8example.fdf
 t/attribs.t
 t/distribution.t
 t/fdfparser_newline.fdf
