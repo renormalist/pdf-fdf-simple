@@ -10,7 +10,7 @@ use Parse::RecDescent;
 use strict;
 use warnings;
 
-plan tests => 4;
+plan tests => 5;
 
 ################## tests ##################
 
@@ -29,6 +29,10 @@ ok (($erg->{'Zu- und Vorname'} eq 'Steffen Schwigon' and
 is ($fdf->attribute_file,
     'hundev1.pdf',
     "attribute_file");
+
+is ($fdf->attribute_ufile,
+    '/atlas/home/wef/IssuesMapping/Surveys/ME002.pdf',
+    "attribute_ufile");
 
 ok ((grep '<ece53a3b05e57db38ed6f01c29a13ced>', @{$fdf->attribute_id}),
     "attribute_id 1");

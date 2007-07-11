@@ -21,7 +21,7 @@ ok ($parser, "setting up");
 my $fdf_content_ptr = $parser->load;
 
 ok (($fdf_content_ptr->{'uncomment'} eq ' \ '),
-    "parsing \\");
+    "parsing newline");
 ok (($fdf_content_ptr->{'slash r'} eq 'xx'),
     "parsing slash r");
 ok (($fdf_content_ptr->{'dM'} eq "x\nx"),

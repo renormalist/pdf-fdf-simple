@@ -7,7 +7,7 @@ use Data::Dumper;
 use strict;
 use warnings;
 
-plan tests => 6;
+plan tests => 9;
 
 ############################################################
 #
@@ -53,3 +53,10 @@ foreach my $key (keys %$new_fdf_content) {
   }
 }
 ok ($compare_success, "compare");
+
+is( $parser->attribute_file,  $parser2->attribute_file,  "compare file" );
+is( $parser->attribute_ufile, $parser2->attribute_ufile, "compare ufile" );
+
+is_deeply( [ sort @{$parser->attribute_id}  ],
+           [ sort @{$parser2->attribute_id} ],
+           "compare ids" );

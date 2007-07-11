@@ -7,7 +7,7 @@ use vars qw($VERSION $deferred_result_FDF_OPTIONS);
 use Data::Dumper;
 use Parse::RecDescent;
 
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 #Parse::RecDescent environment variables: enable for Debugging
 #$::RD_TRACE = 1;
@@ -21,6 +21,7 @@ use Class::MethodMaker
              'errmsg',
              'parser',
              'attribute_file',
+             'attribute_ufile',
              'attribute_id',
             ],
  new_with_init => 'new',
@@ -47,7 +48,7 @@ sub _post_init {
          docstart : /%FDF-[0-9]+\.[0-9]+/ garbage
                   | # empty
 
-         garbage : /%.*/
+         garbage : /%[^0-9]*/
                  | # empty
 
          objlist : obj objlist
@@ -244,7 +245,7 @@ sub _post_init {
 	 #
 	 #   (All the "problematic" chars and chains of them
 	 #   are already handled in the rules above.)
-        	   | /[\r\t\n\\\\ ]/
+                   | /[\r\t\n\\\\ ]/
                      {
                        $return = $item[1];
                      }
@@ -254,12 +255,17 @@ sub _post_init {
                      }
 
          attributes : '/F' '(' <skip:""> value <skip:$item[3]> ')' attributes
-	              <defer: $PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{F} = $item[4];>
-	              {
-		       $return = $item{value};
-		      }
-	            | '/ID' '[' idnum(s?) ']' attributes
-	            | # empty
+                      <defer: $PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{F} = $item[4];>
+                      {
+                        $return = $item{value};
+                      }
+                    | '/UF' '(' <skip:""> value <skip:$item[3]> ')' attributes
+                      <defer: $PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{UF} = $item[4];>
+                      {
+                        $return = $item{value};
+                      }
+                    | '/ID' '[' idnum(s?) ']' attributes
+                    | # empty
 
          name : /([^\)][\s]*)*/   # one symbol but not \)
 
@@ -288,6 +294,10 @@ sub _fdf_header {
   # /F
   if ($self->attribute_file){
     $string .= "/F (".$self->attribute_file.")";
+  }
+  # /UF
+  if ($self->attribute_ufile){
+    $string .= "/UF (".$self->attribute_ufile.")";
   }
   # /ID
   if ($self->attribute_id){
@@ -406,7 +416,8 @@ sub load {
   my $output = $self->parser->startrule ($filecontent);
 
   # take over parser results
-  $self->attribute_file ($PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{F}); # /F
+  $self->attribute_file ($PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{F});   # /F
+  $self->attribute_ufile ($PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{UF}); # /UF
   $self->attribute_id ($PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID});    # /ID
   $self->content ($self->_map_parser_output ($output));
   $self->errmsg ("Corrupt FDF file!\n") unless $self->content;
