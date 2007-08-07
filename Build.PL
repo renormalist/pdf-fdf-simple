@@ -6,7 +6,7 @@ my %params = (
               requires    => {
                               perl               => '5.6.1',
                               Parse::RecDescent  => '1.94',
-                              Class::MethodMaker => 0,
+                              Class::Accessor    => 0,
                               Test::More         => 0,
                              },
               create_makefile_pl => 'passthrough',

@@ -1,3 +1,12 @@
+2007-08-02  Steffen Schwigon  <schwigon@webit.de>
+
+	* 0.12
+
+	* Switched from Class::MethodMaker to Class::Accesors, because I
+	didn't like the pollution with lots of variants of my accessors
+	that all do the same. Feel free to complain about this step. If
+	you convince me, I maybe switch back. :-)
+	
 2007-07-11  Steffen Schwigon  <schwigon@webit.de>
 
 	* 0.11
