@@ -6,11 +6,14 @@ use warnings;
 use Test::More;
 use PDF::FDF::Simple;
 
-plan tests => 63;
+plan tests => 76;
 
-################## tests ##################
+################## tests ###################
 
-# Test accessors before migration away from Class::MethodMaker
+# Test accessors before and after migration
+# from Class::MethodMaker to Class::Accessor
+
+############################################
 
 # 'skip_undefined_fields',
 # 'filename',
@@ -101,17 +104,17 @@ my %initvalues = (
                   'attribute_id'          => 'qwqmnbyo211',
                  );
 # new with hashref
-$fdf = new PDF::FDF::Simple(%initvalues);
-is( $fdf->skip_undefined_fields, $initvalues{skip_undefined_fields}, 'skip_undefined_fields - constructor');
-is( $fdf->content, $initvalues{content}, 'content - constructor');
-is( $fdf->errmsg, $initvalues{errmsg}, 'errmsg - constructor');
-is( $fdf->attribute_file, $initvalues{attribute_file}, 'attribute_file - constructor');
-is( $fdf->attribute_ufile, $initvalues{attribute_ufile}, 'attribute_ufile - constructor');
-is( $fdf->attribute_id, $initvalues{attribute_id}, 'attribute_id - constructor');
-# parser is internally a P::RD instance
+$fdf = new PDF::FDF::Simple(\%initvalues);
+is( $fdf->skip_undefined_fields, $initvalues{skip_undefined_fields}, 'skip_undefined_fields - constructor 1');
+is( $fdf->content, $initvalues{content}, 'content - constructor 1');
+is( $fdf->errmsg, $initvalues{errmsg}, 'errmsg - constructor 1');
+is( $fdf->attribute_file, $initvalues{attribute_file}, 'attribute_file - constructor 1');
+is( $fdf->attribute_ufile, $initvalues{attribute_ufile}, 'attribute_ufile - constructor 1');
+is( $fdf->attribute_id, $initvalues{attribute_id}, 'attribute_id - constructor 1');
 
-foreach (sort keys %initvalues) {
-    is( $fdf->{$_}, $initvalues{$_}, "$_ - constructor hash elem 1") unless $_ eq 'parser';
+# parser is internally a P::RD instance
+foreach (grep {$_ ne 'parser'} sort keys %initvalues) {
+    is( $fdf->{$_}, $initvalues{$_}, "$_ - constructor hash elem 1");
 }
 
 my %initvalues2 = (
@@ -126,16 +129,16 @@ my %initvalues2 = (
                   );
 # new with hash
 $fdf = new PDF::FDF::Simple(%initvalues2);
-is( $fdf->skip_undefined_fields, $initvalues2{skip_undefined_fields}, 'skip_undefined_fields - constructor');
-is( $fdf->content, $initvalues2{content}, 'content - constructor');
-is( $fdf->errmsg, $initvalues2{errmsg}, 'errmsg - constructor');
-is( $fdf->attribute_file, $initvalues2{attribute_file}, 'attribute_file - constructor');
-is( $fdf->attribute_ufile, $initvalues2{attribute_ufile}, 'attribute_ufile - constructor');
-is( $fdf->attribute_id, $initvalues2{attribute_id}, 'attribute_id - constructor');
-# parser is internally a P::RD instance
+is( $fdf->skip_undefined_fields, $initvalues2{skip_undefined_fields}, 'skip_undefined_fields - constructor 2');
+is( $fdf->content, $initvalues2{content}, 'content - constructor 2');
+is( $fdf->errmsg, $initvalues2{errmsg}, 'errmsg - constructor 2');
+is( $fdf->attribute_file, $initvalues2{attribute_file}, 'attribute_file - constructor 2');
+is( $fdf->attribute_ufile, $initvalues2{attribute_ufile}, 'attribute_ufile - constructor 2');
+is( $fdf->attribute_id, $initvalues2{attribute_id}, 'attribute_id - constructor 2');
 
-foreach (sort keys %initvalues2) {
-    is( $fdf->{$_}, $initvalues2{$_}, "$_ - constructor hash elem 2") unless $_ eq 'parser';
+# parser is internally a P::RD instance
+foreach (grep {$_ ne 'parser'} sort keys %initvalues2) {
+    is( $fdf->{$_}, $initvalues2{$_}, "$_ - constructor hash elem 2");
 }
 
 # with inheritance
@@ -145,7 +148,7 @@ use base 'PDF::FDF::Simple';
 
 package main;
 
-# new with hash
+# new with hashref
 my %initvalues3 = (
                    'skip_undefined_fields' => 'gregef213r421321',
                    'filename'              => 'kdsfsdfs76h214eq',
@@ -156,16 +159,40 @@ my %initvalues3 = (
                    'attribute_ufile'       => 'ewqdqwmqdnwdqgq12',
                    'attribute_id'          => 'wqmnqybewgtreo211',
                   );
-$fdf = new PDF::FDF::Simple::Inherited(%initvalues3);
-is( $fdf->skip_undefined_fields, $initvalues3{skip_undefined_fields}, 'skip_undefined_fields - constructor inherited');
-is( $fdf->content, $initvalues3{content}, 'content - constructor inherited');
-is( $fdf->errmsg, $initvalues3{errmsg}, 'errmsg - constructor inherited');
-is( $fdf->attribute_file, $initvalues3{attribute_file}, 'attribute_file - constructor inherited');
-is( $fdf->attribute_ufile, $initvalues3{attribute_ufile}, 'attribute_ufile - constructor inherited');
-is( $fdf->attribute_id, $initvalues3{attribute_id}, 'attribute_id - constructor inherited');
-# parser is internally a P::RD instance
+$fdf = new PDF::FDF::Simple::Inherited(\%initvalues3);
+is( $fdf->skip_undefined_fields, $initvalues3{skip_undefined_fields}, 'skip_undefined_fields - constructor inherited 3');
+is( $fdf->content, $initvalues3{content}, 'content - constructor inherited 3');
+is( $fdf->errmsg, $initvalues3{errmsg}, 'errmsg - constructor inherited 3');
+is( $fdf->attribute_file, $initvalues3{attribute_file}, 'attribute_file - constructor inherited 3');
+is( $fdf->attribute_ufile, $initvalues3{attribute_ufile}, 'attribute_ufile - constructor inherited 3');
+is( $fdf->attribute_id, $initvalues3{attribute_id}, 'attribute_id - constructor inherited 3');
 
-foreach (sort keys %initvalues3) {
-    is( $fdf->{$_}, $initvalues3{$_}, "$_ - constructor hash elem inherited") unless $_ eq 'parser';
+# parser is internally a P::RD instance
+foreach (grep {$_ ne 'parser'} sort keys %initvalues3) {
+    is( $fdf->{$_}, $initvalues3{$_}, "$_ - constructor hash elem inherited 3");
+}
+
+# new with hash
+my %initvalues4 = (
+                   'skip_undefined_fields' => 'ergregef213r421321',
+                   'filename'              => 'kdewsfsdfs76h214eq',
+                   'content'               => 'qnmeadswqwe1121321wbd',
+                   'errmsg'                => 'mb1231mdfsad213nnb23mnb',
+                   'parser'                => 'yoiq123asdsjd213i1dop',
+                   'attribute_file'        => 'o13245popp45h1231o',
+                   'attribute_ufile'       => 'ewqdqwmqdnwdaw4w2qgq12',
+                   'attribute_id'          => 'g43gwqmnqybewgtreo211',
+                  );
+$fdf = new PDF::FDF::Simple::Inherited(%initvalues4);
+is( $fdf->skip_undefined_fields, $initvalues4{skip_undefined_fields}, 'skip_undefined_fields - constructor inherited 4');
+is( $fdf->content, $initvalues4{content}, 'content - constructor inherited 4');
+is( $fdf->errmsg, $initvalues4{errmsg}, 'errmsg - constructor inherited 4');
+is( $fdf->attribute_file, $initvalues4{attribute_file}, 'attribute_file - constructor inherited 4');
+is( $fdf->attribute_ufile, $initvalues4{attribute_ufile}, 'attribute_ufile - constructor inherited 4');
+is( $fdf->attribute_id, $initvalues4{attribute_id}, 'attribute_id - constructor inherited 4');
+
+# parser is internally a P::RD instance
+foreach (grep {$_ ne 'parser'} sort keys %initvalues4) {
+    is( $fdf->{$_}, $initvalues4{$_}, "$_ - constructor hash elem inherited 4");
 }
 

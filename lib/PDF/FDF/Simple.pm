@@ -32,11 +32,16 @@ sub new {
                   skip_undefined_fields => 0,
                   parser                => new Parse::RecDescent (
        q(
-         startrule : docstart objlist 'trailer' '<<' '/Root 1 0 R' '>>' /.*/
-                      {
-			$PDF::FDF::Simple::deferred_result_FDF_OPTIONS = {};
-                        $return = $item{objlist};
-                      }
+         startrule : docstart objlist xref(?) 'trailer' '<<' '/Root 1 0 R' '>>' /.*/
+                     {
+                       $PDF::FDF::Simple::deferred_result_FDF_OPTIONS = {};
+                       $return = $item{objlist};
+                     }
+
+         xref : 'xref' /\d+/ /\d+/ xrefentry(s)
+
+         xrefentry : /\d+/ /\d+/ /[fn]/
+
          docstart : /%FDF-[0-9]+\.[0-9]+/ garbage
                   | # empty
 
@@ -54,21 +59,21 @@ sub new {
 
          obj : /\d+/ /\d+/ 'obj' objbody 'endobj'
                {
-		$return = $item{objbody};
-	       }
+                 $return = $item{objbody};
+               }
 
          objbody : '<<' '/FDF' '<<' attributes '/Fields' '[' fieldlist ']' attributes '>>' '>>'
                    {
-		    $return = $item{fieldlist};
-		   }
+                     $return = $item{fieldlist};
+                   }
                  | '[' fieldlist ']'
                    {
-		     $return = $item{fieldlist};
-		   }
+                     $return = $item{fieldlist};
+                   }
                  | '<<' '/FDF' '<<' attributes '/Fields' objreference attributes '>>' '>>'
                    {
-		    $return = [];
-		   }
+                     $return = [];
+                   }
 
          objreference : /\d+/ /\d+/ 'R'
 
@@ -107,9 +112,9 @@ sub new {
                      }
 
          kids : '/Kids' '[' fieldlist ']'
-	        {
-		 $return = $item{fieldlist};
-	        }
+                {
+                  $return = $item{fieldlist};
+                }
 
          field : '<<' fieldname fieldvalue '>>'
                  {
@@ -147,13 +152,13 @@ sub new {
                      }
 
 	 value : valuechar value
-	         {
-                   $return = $item{valuechar}.$item{value};
-                 }
-	       | # empty
-	         {
-		  $return = "";
-                 }
+             {
+               $return = $item{valuechar}.$item{value};
+             }
+           | # empty
+             {
+               $return = "";
+             }
 
 	 # This handles different whitespace artefacts that exist
 	 # in this world and handles them similar to FDFToolkit.
@@ -262,13 +267,13 @@ sub new {
          name : /([^\)][\s]*)*/   # one symbol but not \)
 
          idnum : '<' /[\w]*/ '>'
-	         <defer: push (@{$PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID}}, $item[1].$item[2].$item[3]); >
+                 <defer: push (@{$PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID}}, $item[1].$item[2].$item[3]); >
                | '(' /([^()])*/ ')'
-	         <defer: push (@{$PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID}}, $item[1].$item[2].$item[3]); >
+                 <defer: push (@{$PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID}}, $item[1].$item[2].$item[3]); >
 
         )),
                  );
-  # accept hashes or hash refs
+  # accept hashes or hash refs for backwards compatibility
   my %ARGS = ref($_[0]) =~ /HASH/ ? %{$_[0]} : @_;
   my $self = Class::Accessor::new($class, { %DEFAULTS, %ARGS });
   return $self;
