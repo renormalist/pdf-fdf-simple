@@ -1,3 +1,15 @@
+2008-04-06  Steffen Schwigon  <ss5@renormalist.net>
+
+	* 0.13
+
+	* More grammar enhancements for value arrays and for strange ID
+	attribute values from Eric Amick.
+
+	* Tests for new grammar changes and the xref changes from v0.12.
+
+	* Tests for the accessor change in v0.12, that I forgot in the
+	manifest.
+
 2008-03-22  Steffen Schwigon  <ss5@renormalist.net>
 
 	* 0.12

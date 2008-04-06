@@ -9,6 +9,7 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 META.yml
 README
+t/accessors.t
 t/acro8.t
 t/acro8example.fdf
 t/attribs.t
@@ -29,4 +30,8 @@ t/noisyfileattr.t
 t/pod-coverage.t
 t/simple.fdf
 t/simple.t
+t/strange_id_values.fdf
+t/strange_id_values.t
 t/undef_handling.t
+t/with_xrefs_and_valuearrays.fdf
+t/with_xrefs_and_valuearrays.t

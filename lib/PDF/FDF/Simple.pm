@@ -19,7 +19,7 @@ PDF::FDF::Simple->mk_accessors(qw(
                                      attribute_id
                                 ));
 
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 #Parse::RecDescent environment variables: enable for Debugging
 #$::RD_TRACE = 1;
@@ -32,7 +32,7 @@ sub new {
                   skip_undefined_fields => 0,
                   parser                => new Parse::RecDescent (
        q(
-         startrule : docstart objlist xref(?) 'trailer' '<<' '/Root 1 0 R' '>>' /.*/
+         startrule : docstart objlist xref(?) 'trailer' '<<' '/Root' objreference /[^>]*/ '>>' /.*/
                      {
                        $PDF::FDF::Simple::deferred_result_FDF_OPTIONS = {};
                        $return = $item{objlist};
@@ -135,6 +135,10 @@ sub new {
                         $return =~ s/\\\\(\d{3})/sprintf ("%c", oct($1))/eg;         # handle octal
                         $return =~ s/\\#([0-9A-F]{2})/sprintf ("%c",  hex($1))/eg;   # handle hex
                       }
+                    | '/V' '[' valarray ']'
+                      {
+                        $return = $item{valarray};
+                      }
                     | '/V' feature
                       {
                         $return = substr ($item{feature}, 1);
@@ -150,6 +154,13 @@ sub new {
                         $return =~ s/\\\\(\d{3})/sprintf ("%c", oct($1))/eg;         # handle octal
                         $return =~ s/\\#([0-9A-F]{2})/sprintf ("%c",  hex($1))/eg;   # handle hex
                      }
+
+         valarray : '(' <skip:""> value <skip:$item[2]> ')' valarray
+                      {
+                        push @{$return}, $item{value}, @{$item{valarray}};
+                      }
+                      | # empty
+                      { $return = []; }
 
 	 value : valuechar value
              {
@@ -268,8 +279,24 @@ sub new {
 
          idnum : '<' /[\w]*/ '>'
                  <defer: push (@{$PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID}}, $item[1].$item[2].$item[3]); >
-               | '(' /([^()])*/ ')'
-                 <defer: push (@{$PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID}}, $item[1].$item[2].$item[3]); >
+               | '(' idnumchars ')'
+                 <defer: push (@{$PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{ID}}, $item[1].$item{idnumchars}.$item[3]); >
+
+         idnumchar : '\\\\\)'
+                     { $return = $item[1]; }
+                   | '\\\\\('
+                     { $return = $item[1]; }
+                   | /[^()]/
+                     { $return = $item[1]; }
+
+         idnumchars : idnumchar idnumchars
+                      {
+                        $return = $item{idnumchar}.$item{idnumchars};
+                      }
+                    | # empty
+                      {
+                        $return = "";
+                      }
 
         )),
                  );
