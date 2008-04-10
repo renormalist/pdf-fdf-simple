@@ -21,13 +21,13 @@ my $res = $fdf->load;
 
 is (
     $res->{'datClientNameDisplay'},
-    'Laidlaw Energy Group',
+    'Foobar Group',
     "parse"
    );
 
 is (
     $fdf->attribute_file,
-    '/C/Documents and Settings/mbrower/My Documents/Mosaic Federal Affairs LLC/CY 2008-Laidlaw-Year End-Amend-LD2_Semiannual_Adobe1.pdf',
+    '/C/Documents and Settings/abc/My Documents/Adobe1.pdf',
     "attribute_file"
    );
 

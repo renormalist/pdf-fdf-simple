@@ -21,13 +21,13 @@ my $res = $fdf->load;
 
 is (
     $res->{'AgenciesContacted'},
-    'AMTRAK - Natl Railroad Passenger Corporation',
+    'ACME - Some Corporation',
     "parse"
    );
 
 is (
     $fdf->attribute_file,
-    'file:///Users/lcsuser/Desktop/Quarterly%20Prod%20Test/LD2Q.pdf',
+    'file:///Users/lcsuser/Desktop/Test/LD2Q.pdf',
     "attribute_file"
    );
 

@@ -1,6 +1,6 @@
 ---
 name: PDF-FDF-Simple
-version: 0.13
+version: 0.14
 author:
   - 'Steffen Schwigon <ss5@renormalist.net>,'
 abstract: Read and write (Acrobat) FDF files.
@@ -15,7 +15,7 @@ requires:
 provides:
   PDF::FDF::Simple:
     file: lib/PDF/FDF/Simple.pm
-    version: 0.13
+    version: 0.14
 generated_by: Module::Build version 0.280801
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
