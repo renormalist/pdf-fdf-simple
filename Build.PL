@@ -9,7 +9,6 @@ my %params = (
                               Class::Accessor::Fast => 0,
                               Test::More            => 0,
                              },
-              create_makefile_pl => 'passthrough',
              );
 
 my $build = new Module::Build (%params);

@@ -1,6 +1,6 @@
 ---
 name: PDF-FDF-Simple
-version: 0.15
+version: 0.17
 author:
   - 'Steffen Schwigon <ss5@renormalist.net>,'
 abstract: Read and write (Acrobat) FDF files.
@@ -8,14 +8,14 @@ license: perl
 resources:
   license: http://dev.perl.org/licenses/
 requires:
-  Class::Accessor: 0
+  Class::Accessor::Fast: 0
   Parse::RecDescent: 1.94
   Test::More: 0
   perl: 5.6.1
 provides:
   PDF::FDF::Simple:
     file: lib/PDF/FDF/Simple.pm
-    version: 0.15
+    version: 0.17
 generated_by: Module::Build version 0.280801
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
