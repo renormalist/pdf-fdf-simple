@@ -7,7 +7,7 @@ use vars qw($VERSION $deferred_result_FDF_OPTIONS);
 use Data::Dumper;
 use Parse::RecDescent;
 
-use base 'Class::Accessor';
+use base 'Class::Accessor::Fast';
 PDF::FDF::Simple->mk_accessors(qw(
                                      skip_undefined_fields
                                      filename
@@ -19,7 +19,7 @@ PDF::FDF::Simple->mk_accessors(qw(
                                      attribute_id
                                 ));
 
-$VERSION = '0.14';
+$VERSION = '0.16';
 
 #Parse::RecDescent environment variables: enable for Debugging
 #$::RD_TRACE = 1;
@@ -133,7 +133,7 @@ sub new {
                       {
                         $return = $item{value};
                         $return =~ s/\\\\(\d{3})/sprintf ("%c", oct($1))/eg;         # handle octal
-                        $return =~ s/\\#([0-9A-F]{2})/sprintf ("%c",  hex($1))/eg;   # handle hex
+                        #$return =~ s/\\#([0-9A-F]{2})/sprintf ("%c",  hex($1))/eg;   # handle hex
                       }
                     | '/V' '[' valarray ']'
                       {
@@ -432,7 +432,11 @@ sub load {
   }
 
   # parse
-  my $output = $self->parser->startrule ($filecontent);
+  my $output;
+  {
+      local $SIG{'__WARN__'} = sub { warn $_[0] unless $_[0] =~ /Deep recursion on subroutine/ };
+      $output = $self->parser->startrule ($filecontent);
+  }
 
   # take over parser results
   $self->attribute_file ($PDF::FDF::Simple::deferred_result_FDF_OPTIONS->{F});   # /F

@@ -7,10 +7,16 @@ use File::Temp qw( tempfile );
 
 use Data::Dumper;
 use Parse::RecDescent;
+
 use strict;
 use warnings;
 
-plan tests => 2;
+my $test_count = 2;
+
+eval "use Test::NoWarnings";
+$test_count++ unless $@;
+
+plan tests => $test_count;
 
 ################## tests ##################
 

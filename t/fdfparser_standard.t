@@ -7,7 +7,7 @@ use Data::Dumper;
 use strict;
 use warnings;
 
-plan tests => 18;
+plan tests => 19;
 
 ################## tests ##################
 
@@ -30,8 +30,10 @@ ok (($fdf_content_ptr->{'root.checkbox1'} eq 'OFF'),
     "parsing file (special values)");
 ok (($fdf_content_ptr->{'root.specials.parenthesize'} eq ' (parenthesize) '),
     "parsing file (parenthesize)");
-ok (($fdf_content_ptr->{'root.specials.hexa'} eq 'zufällig'),
-    "parsing file (hexa)");
+ok (($fdf_content_ptr->{'root.specials.hexa'} eq 'zuf#E4llig'),
+    "parsing file (hexa, no hex decode applies)");
+ok (($fdf_content_ptr->{'root.specials.hexb'} eq 'zufällig'),
+    "parsing file (hexb, hex decode to literal names)");
 ok (($fdf_content_ptr->{'root.parentB.kidB_B'} eq 'valueB_B'),
     "parsing file (parent / child)");
 ok (($fdf_content_ptr->{'root.parentB.kidB_A'} eq 'valueB_A'),
@@ -54,4 +56,4 @@ ok (($fdf_content_ptr->{'root.data.email'} eq 'info@doo.de'),
     "parsing file (special characters)");
 
 my $keys = keys %{$fdf_content_ptr};
-ok ($keys == 17, "number of key-value pairs");
+ok ($keys == 18, "number of key-value pairs");

@@ -22,7 +22,7 @@ my $parser = new PDF::FDF::Simple ({
 ok ($parser, "setting up 1");
 
 my $fdf_content_ptr = $parser->load;
-ok ((scalar keys %$fdf_content_ptr == 17),
+ok ((scalar keys %$fdf_content_ptr == 18),
     "parsing 1");
 
 $parser->filename ($writeto_testfile);

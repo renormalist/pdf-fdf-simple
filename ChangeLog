@@ -1,3 +1,23 @@
+2008-04-24  Steffen Schwigon  <ss5@renormalist.net>
+
+	* 0.16
+
+	* Switched to yet another accessor class: Class::Accessor::Fast.
+
+	* Fixed deep recursion warnings. Tests for this. Thanks to rafl++.
+
+	* Dropped compatibility Makefile.PL.
+
+2008-04-15  Steffen Schwigon  <ss5@renormalist.net>
+
+	* 0.15
+
+	* Hex decoding (decode bytes via #\d\d) does not apply to field
+	values values inside /V (...), only to literal values. Thanks to
+	Eric Amick.
+
+	* Fixed tests to reflect the above hex decoding change.
+
 2008-04-11  Steffen Schwigon  <ss5@renormalist.net>
 
 	* 0.14
