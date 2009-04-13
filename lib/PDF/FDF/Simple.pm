@@ -6,6 +6,7 @@ use warnings;
 use vars qw($VERSION $deferred_result_FDF_OPTIONS);
 use Data::Dumper;
 use Parse::RecDescent;
+use IO::File;
 
 use base 'Class::Accessor::Fast';
 PDF::FDF::Simple->mk_accessors(qw(
@@ -32,6 +33,34 @@ sub new {
                   skip_undefined_fields => 0,
                   parser                => new Parse::RecDescent (
        q(
+	 {
+		use Compress::Zlib;
+
+		# Local variable init - RJH
+		my $strname;
+		my $strcontent;
+		my $fh = new IO::File;
+
+		# RJH Can't include standard Perl in the parser so define a function
+		# here so it's included in its namespace
+		sub write_file
+		{
+			my($file,$content) = @_;
+
+			my $x = inflateInit()
+			      or die "Cannot create a inflation stream\n";
+			$fh->open(">$file") or die "Failed to create file $file - $!";
+
+			my $buffer = $$content;
+			my $sync = $x->inflateSync($buffer);
+			print "SYNC: $sync\n";
+
+			my($output, $status) = $x->inflate($buffer);
+			print "STATUS:$status\n";
+			print $fh $output;
+			$fh->close();
+		};
+	}
          startrule : docstart objlist xref(?) 'trailer' '<<' '/Root' objreference /[^>]*/ '>>' /.*/
                      {
                        $PDF::FDF::Simple::deferred_result_FDF_OPTIONS = {};
@@ -74,6 +103,81 @@ sub new {
                    {
                      $return = [];
                    }
+                 | '<<' '/F' filename '/EF' '<<' '/F' objreference '>>' '/Type/Filespec' '>>'
+                   {
+			$::strname = $item[3];
+			$::strcontent = ''; # clear ready for next file
+                     $return = [];
+                   }
+		| '<<' '/Length' m#\d+# filter(?) subtype(?) params(?) dl(?) stream
+		   {
+			#print "STRNAME = $::strname\nSTRCONTENT = $::strcontent\n";
+			# RJH don't write until FlateDecode developed
+			#&write_file($::strname,\$::strcontent);
+			
+                     $return = [];
+		   }
+		| '<<' '/StemV' m#\d+# stemparams stemstream
+		   {
+			$return = [];
+		   }
+
+	stemparams : stemparam stemparams
+		| # empty
+
+	stemparam : '/' m#\w+#
+
+	stemstream : streamcont 'endstream'
+		{
+		  $return = $item[1];
+		}
+
+	dl : '/DL' m#\d+# '>>'
+
+	filename : '(' name ')'
+		{
+			$return = $item[2];
+		}
+
+# RJH
+	stream : 'stream' streamcont 'endstream'
+               {
+		 $return = $item[2];
+		 1;
+               }
+
+	streamcont : streamline streamcont
+		{
+			$return = $item[1];
+		}
+		| # empty
+
+	streamline : ...!'endstream' m#.*#
+		{
+			$::strcontent .= $item[2];
+			$return = $item[2];
+		}
+	
+	filter : '/Filter' filtertype
+
+	filtertype : '/FlateDecode'
+
+	subtype : '/Subtype' '/application#2Fpdf'
+
+	params : '/Params' '<<' paramlist '>>'
+
+	paramlist : param paramlist
+		| # empty
+
+	param : paramname paramvalue(?)
+
+	paramname : '/' m#\w+#
+
+	paramvalue : '(' m#[^\)]*# ')'
+		| '<' m#\w*# '>'
+		| m#\w+#
+
+
 
          objreference : /\d+/ /\d+/ 'R'
 
@@ -145,6 +249,8 @@ sub new {
                         $return =~ s/\\\\(\d{3})/sprintf ("%c", oct($1))/eg;         # handle octal
                         $return =~ s/\\#([0-9A-F]{2})/sprintf ("%c",  hex($1))/eg;   # handle hex
                       }
+# RJH
+		    | '/V' objreference
 
          feature :  m!/[^\s/>]*!
 
