@@ -8,6 +8,7 @@ my %params = (
                               Parse::RecDescent     => '1.94',
                               Class::Accessor::Fast => 0,
                               Test::More            => 0,
+                              Compress::Zlib        => 0,
                              },
              );
 
