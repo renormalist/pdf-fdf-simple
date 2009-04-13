@@ -3,3 +3,5 @@ Build
 _build
 blib
 PDF-FDF-Simple-0.*.tar.gz
+t/fdfparser_output.fdf
+
