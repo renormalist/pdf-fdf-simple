@@ -1,8 +1,15 @@
-2008-07-29  Steffen Schwigon  <ss5@renormalist.net>
+2009-04-13  Steffen Schwigon  <ss5@renormalist.net>
 
 	* 0.18
 
 	* Mini synopsis update about accessing single fields.
+
+	* Support for stream objects (RJH and Dave Barter)
+
+	* Add parsing for StemV object (RJH and Dave Barter)
+
+	* parsing optional /Type/* attribute plus unittest (spotted and
+	test provided by Rosal Lozada)
 
 2008-04-24  ss5  <ss5@renormalist.net>
 
