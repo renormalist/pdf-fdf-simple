@@ -33,22 +33,23 @@ PREREQUISITES
 
   Parse::RecDescent (1.94)
   Class::Accessor
+  Compress::Zlib (since PDF::FDF::Simple v0.18)
 
 AUTHOR
 
   Steffen Schwigon <ss5@renormalist.net>
   Tim Schreier
 
+REPOSITORY
+
+  The public repository is hosted on github:
+    git clone git://github.com/renormalist/pdf-fdf-simple.git
+
 LICENSE
 
-  Copyright (c) 2004..2008 Steffen Schwigon. All rights reserved.
+  Copyright (c) 2004..2009 Steffen Schwigon. All rights reserved.
   This program is free software; you can redistribute it and/or modify
   it under the same terms as Perl itself.
-
-REPOSITORY
-    The public repository is hosted on github:
-
-      git clone git://github.com/renormalist/pdf-fdf-simple.git
 
 BUGS
 
