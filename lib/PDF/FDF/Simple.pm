@@ -86,12 +86,15 @@ sub new {
                       $return = [];
                    }
 
+         type : /\/Type\/(Filespec|Catalog)/
+              | # empty
+
          obj : /\d+/ /\d+/ 'obj' objbody 'endobj'
                {
                  $return = $item{objbody};
                }
 
-         objbody : '<<' '/FDF' '<<' attributes '/Fields' '[' fieldlist ']' attributes '>>' '>>'
+         objbody : '<<' '/FDF' '<<' attributes '/Fields' '[' fieldlist ']' attributes '>>' type '>>'
                    {
                      $return = $item{fieldlist};
                    }
@@ -114,7 +117,6 @@ sub new {
 			#print "STRNAME = $::strname\nSTRCONTENT = $::strcontent\n";
 			# RJH don't write until FlateDecode developed
 			#&write_file($::strname,\$::strcontent);
-			
                      $return = [];
 		   }
 		| '<<' '/StemV' m#\d+# stemparams stemstream
