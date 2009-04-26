@@ -86,7 +86,7 @@ sub new {
                       $return = [];
                    }
 
-         type : /\/Type\/(Filespec|Catalog)/
+         type : /\/Type/ /\/(Filespec|Catalog)/
               | # empty
 
          obj : /\d+/ /\d+/ 'obj' objbody 'endobj'
@@ -94,7 +94,7 @@ sub new {
                  $return = $item{objbody};
                }
 
-         objbody : '<<' '/FDF' '<<' attributes '/Fields' '[' fieldlist ']' attributes '>>' type '>>'
+         objbody : '<<' '/FDF' '<<' attributes '/Fields' '[' fieldlist ']' attributes '>>' type(?) '>>'
                    {
                      $return = $item{fieldlist};
                    }
@@ -106,7 +106,7 @@ sub new {
                    {
                      $return = [];
                    }
-                 | '<<' '/F' filename '/EF' '<<' '/F' objreference '>>' '/Type/Filespec' '>>'
+                 | '<<' '/F' filename '/EF' '<<' '/F' objreference '>>' '/Type' '/Filespec' '>>'
                    {
 			$::strname = $item[3];
 			$::strcontent = ''; # clear ready for next file
@@ -393,6 +393,8 @@ sub new {
          idnumchar : '\\\\\)'
                      { $return = $item[1]; }
                    | '\\\\\('
+                     { $return = $item[1]; }
+                   | '\\\\\\\\'
                      { $return = $item[1]; }
                    | /[^()]/
                      { $return = $item[1]; }
