@@ -4,6 +4,8 @@
 
 	* Grammar fixes provided by Eric Amick.
 
+	* include forgotten tests and example fdf files from 0.18
+
 	* added git repository to META.yml
 
 2009-04-13  Steffen Schwigon  <ss5@renormalist.net>

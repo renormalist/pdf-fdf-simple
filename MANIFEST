@@ -31,6 +31,8 @@ t/simple.fdf
 t/simple.t
 t/strange_id_values.fdf
 t/strange_id_values.t
+t/TEST-1234.fdf
+t/typecatalog.t
 t/undef_handling.t
 t/with_xrefs_and_valuearrays.fdf
 t/with_xrefs_and_valuearrays.t
