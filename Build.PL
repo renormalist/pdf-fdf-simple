@@ -10,6 +10,11 @@ my %params = (
                               Test::More            => 0,
                               Compress::Zlib        => 0,
                              },
+              meta_add    => {
+                              resources => {
+                                            repository => 'git://github.com/renormalist/pdf-fdf-simple.git',
+                                            }
+                             }
              );
 
 my $build = new Module::Build (%params);

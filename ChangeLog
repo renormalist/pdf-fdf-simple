@@ -1,3 +1,11 @@
+2009-04-26  Steffen Schwigon  <ss5@renormalist.net>
+
+	* 0.19
+
+	* Grammar fixes provided by Eric Amick.
+
+	* added git repository to META.yml
+
 2009-04-13  Steffen Schwigon  <ss5@renormalist.net>
 
 	* 0.18
