@@ -30,19 +30,18 @@ sub new {
   my $class = shift;
 
   my $parser;
-  if ($ENV{USE_PRECOMILED_GRAMMAR}) {
-          # use precompiled grammar
-          use PDF::FDF::Simple::Grammar;
-          $parser = new PDF::FDF::Simple::Grammar;
-  } else {
+  if ($ENV{PDF_FDF_SIMPLE_IGNORE_PRECOMPILED_GRAMMAR}) {
           # use external grammar file
-          print STDERR "Hint: Use precompile grammar by setting USE_PRECOMILED_GRAMMAR=1.\n";
           require File::ShareDir;
           my $grammar_file = File::ShareDir::module_file('PDF::FDF::Simple', 'grammar');
           open GRAMMAR_FILE, $grammar_file or die "Cannot open grammar file ".$grammar_file;
           local $/;
           my $grammar = <GRAMMAR_FILE>;
           $parser     = Parse::RecDescent->new($grammar);
+  } else {
+          # use precompiled grammar
+          use PDF::FDF::Simple::Grammar;
+          $parser = new PDF::FDF::Simple::Grammar;
   }
 
   my %DEFAULTS = (
