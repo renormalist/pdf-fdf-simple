@@ -1,3 +1,17 @@
+2009-04-28  Steffen Schwigon  <ss5@ss5-netbook>
+
+	* 0.20
+
+	* Outsourced grammar file into lib/PDF/FDF/Simple/grammar; now
+	less double-escaping in the grammar because it's no longer part of
+	a quote operator.
+
+	* Provide a precompiled grammar file, created during ./Build
+
+	* for easy development it's still possible to directly load the
+	grammar file by setting the environment variable
+	PDF_FDF_SIMPLE_IGNORE_PRECOMPILED_GRAMMAR=1
+
 2009-04-26  Steffen Schwigon  <ss5@renormalist.net>
 
 	* 0.19
