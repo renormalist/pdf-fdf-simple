@@ -9,6 +9,7 @@ my %params = (
                               Class::Accessor::Fast => 0,
                               Test::More            => 0,
                               Compress::Zlib        => 0,
+                              File::ShareDir        => 0,
                              },
               meta_add    => {
                               resources => {
