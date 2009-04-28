@@ -40,7 +40,7 @@ sub new {
           $parser     = Parse::RecDescent->new($grammar);
   } else {
           # use precompiled grammar
-          use PDF::FDF::Simple::Grammar;
+          require PDF::FDF::Simple::Grammar;
           $parser = new PDF::FDF::Simple::Grammar;
   }
 
