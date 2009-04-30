@@ -1,4 +1,4 @@
-
+# -*- mode: cperl -*-
 	 {
 		use Compress::Zlib;
 
@@ -125,7 +125,7 @@
 			$::strcontent .= $item[2];
 			$return = $item[2];
 		}
-	
+
 	filter : '/Filter' filtertype
 
 	filtertype : '/FlateDecode'
@@ -374,4 +374,3 @@
                         $return = "";
                       }
 
-        
