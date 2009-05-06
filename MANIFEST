@@ -6,6 +6,7 @@ lib/PDF/FDF/Simple.pm
 lib/PDF/FDF/Simple.pod
 lib/PDF/FDF/Simple/Builder.pm
 lib/PDF/FDF/Simple/Grammar.pm
+lib/PDF/FDF/Simple/Grammar.pod
 LICENSE
 MANIFEST			This list of files
 MANIFEST.SKIP
