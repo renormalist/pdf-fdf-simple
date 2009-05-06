@@ -7,7 +7,7 @@
 	part of a quote operator.
 
 	* Provide a precompiled grammar file for faster startup time,
-	updated during ./Build
+	can be updated with "./Build grammar"
 
 	* for easier development it is still possible to compile the
 	grammar at runtime by setting the environment variable
