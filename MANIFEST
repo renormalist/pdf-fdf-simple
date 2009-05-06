@@ -1,8 +1,12 @@
 Build.PL
 ChangeLog
+foo
 INSTALL
+lib/auto/PDF/FDF/Simple/grammar
 lib/PDF/FDF/Simple.pm
 lib/PDF/FDF/Simple.pod
+lib/PDF/FDF/Simple/Builder.pm
+lib/PDF/FDF/Simple/Grammar.pm
 LICENSE
 MANIFEST			This list of files
 MANIFEST.SKIP
