@@ -1,13 +1,13 @@
-2009-04-28  Steffen Schwigon  <ss5@ss5-netbook>
+2009-04-28  Steffen Schwigon  <ss5@renormalist.net>
 
 	* 0.20
 
-	* Outsourced grammar file into lib/PDF/FDF/Simple/grammar; 
-	now less double-escaping in the grammar because it's no longer
-	part of a quote operator.
+	* Outsourced grammar file into lib/PDF/FDF/Simple/grammar; now
+	less double-escaping in the grammar because it's no longer part of
+	a quote operator.
 
-	* Provide a precompiled grammar file for faster startup time,
-	can be updated with "./Build grammar"
+	* Provide a precompiled grammar file for faster startup time, can
+	be updated with "./Build grammar"
 
 	* for easier development it is still possible to compile the
 	grammar at runtime by setting the environment variable
