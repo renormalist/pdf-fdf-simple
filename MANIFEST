@@ -1,6 +1,5 @@
 Build.PL
 ChangeLog
-foo
 INSTALL
 lib/auto/PDF/FDF/Simple/grammar
 lib/PDF/FDF/Simple.pm
