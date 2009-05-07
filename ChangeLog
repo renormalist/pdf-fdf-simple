@@ -1,3 +1,9 @@
+2009-05-07  Steffen Schwigon  <ss5@renormalist.net>
+
+	* 0.21
+
+	* fix "use Parse::RecDescent" into "require" during Build.PL
+
 2009-04-28  Steffen Schwigon  <ss5@renormalist.net>
 
 	* 0.20
