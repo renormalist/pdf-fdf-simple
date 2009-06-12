@@ -6,7 +6,7 @@ PDF::FDF::Simple - Read and write (Acrobat) FDF files.
 
 =head1 SYNOPSIS
 
-  my $fdf = new PDF::FDF::Simple ({ filename => '/tmp/test.fdf' });
+  my $fdf = PDF::FDF::Simple->new({ filename => '/tmp/test.fdf' });
   $fdf->skip_undefined_fields (1);
   $fdf->content ({
                   'name'                 => 'Fred Madison',
