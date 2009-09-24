@@ -1,6 +1,6 @@
 ---
 name: PDF-FDF-Simple
-version: 0.20
+version: 0.21
 author:
   - 'Steffen Schwigon <ss5@renormalist.net>,'
 abstract: Read and write (Acrobat) FDF files.
@@ -19,7 +19,7 @@ build_requires:
 provides:
   PDF::FDF::Simple:
     file: lib/PDF/FDF/Simple.pm
-    version: 0.20
+    version: 0.21
   PDF::FDF::Simple::Builder:
     file: lib/PDF/FDF/Simple/Builder.pm
   PDF::FDF::Simple::Grammar:
