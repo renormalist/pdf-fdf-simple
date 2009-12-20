@@ -103,7 +103,7 @@ sub _quote {
 
 sub _fdf_field_formatstr {
   my $self = shift;
-  return "<< /T (%s) /V (%s) >>\n"
+  return "<< /T(%s)/V(%s) >>\n"
 }
 
 sub as_string {
