@@ -9,12 +9,13 @@ my %params = (
               license        => 'perl',
               build_requires => {
                                  'File::Copy'            => 0,
+                                 'Test::More'            => 0,
+                                 'Test::Deep'            => 0,
                                 },
               requires       => {
                                  'perl'                  => '5.6.1',
                                  'Parse::RecDescent'     => '1.94',
                                  'Class::Accessor::Fast' => 0,
-                                 'Test::More'            => 0,
                                  'Compress::Zlib'        => 0,
                                  'File::ShareDir'        => 0,
                                 },
