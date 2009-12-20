@@ -1,0 +1,20 @@
+%FDF-1.2
+
+1 0 obj
+<<
+/FDF << /Fields 2 0 R>>
+>>
+endobj
+2 0 obj
+[<< /T (DeliverPt) /V (DILIVERY) >>
+<< /T (Header) /V (Released 10/10/08.) >>
+<< /T (Nm) /V (NAME) >>
+<< /T (PurchaseCd) /V (Yes) >>
+]
+endobj
+trailer
+<<
+/Root 1 0 R
+
+>>
+%%EOF
