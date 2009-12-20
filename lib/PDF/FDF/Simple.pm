@@ -20,7 +20,7 @@ PDF::FDF::Simple->mk_accessors(qw(
                                      attribute_id
                                 ));
 
-$VERSION = '0.21';
+$VERSION = '0.22';
 
 #Parse::RecDescent environment variables: enable for Debugging
 #$::RD_TRACE = 1;
