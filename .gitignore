@@ -2,7 +2,7 @@ MANIFEST.bak
 Build
 _build
 blib
-PDF-FDF-Simple-0.*.tar.gz
+PDF-FDF-Simple-*
 t/fdfparser_output.fdf
 t/fdfparser_output2.fdf
 
