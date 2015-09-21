@@ -1,6 +1,5 @@
-=head1 NAME
-
-PDF::FDF::Simple::Grammar - Precompiled grammar for PDF::FDF::Simple
+# ABSTRACT: Precompiled grammar for PDF::FDF::Simple
+# PODNAME: PDF/FDF/Simple/Grammar.pod
 
 =head1 DESCRIPTION
 
@@ -10,7 +9,7 @@ This is the precompiled grammar. It is generated from
 
 using
 
-  ./Build grammar
+  ./author-utils/precompile-grammar
 
 usually done by the maintainer or a developer.
 
@@ -33,9 +32,5 @@ C<@INC>s are used with:
 
   prove -l t/*.t               # ./lib/
   prove -b t/*.t               # ./blib/
-  ./Build test                 # ./blib/
+  make test                    # ./blib/
   perl -MPDF::FDF::Simple ...  # perl's @INC
-
-
-
-
