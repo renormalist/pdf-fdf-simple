@@ -1,10 +1,12 @@
 package PDF::FDF::Simple::Grammar;
-use Parse::RecDescent;
+# ABSTRACT: Precompiled grammar for PDF::FDF::Simple
 
+use Parse::RecDescent;
 { my $ERRORS;
 
 
 package Parse::RecDescent::PDF::FDF::Simple::Grammar;
+
 use strict;
 use vars qw($skip $AUTOLOAD  );
 @Parse::RecDescent::PDF::FDF::Simple::Grammar::ISA = ();
