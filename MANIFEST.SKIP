@@ -5,9 +5,12 @@ Makefile.PL
 ~$
 \.bak$
 t/fdfparser_output.fdf
+t/fdfparser_output2.fdf
 t/.cvsignore
 ^MANIFEST\.bak$
 ^ANNOUNCE$
+MYMETA.json
+MYMETA.yml
 CVS
 .svn
 .git

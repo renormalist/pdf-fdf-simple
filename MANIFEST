@@ -44,3 +44,4 @@ t/with_xrefs_and_valuearrays.fdf
 t/with_xrefs_and_valuearrays.t
 xt/distribution.t
 xt/pod-coverage.t
+META.json
