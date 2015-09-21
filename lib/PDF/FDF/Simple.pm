@@ -4,7 +4,7 @@ package PDF::FDF::Simple;
 use strict;
 use warnings;
 
-use vars qw($VERSION $deferred_result_FDF_OPTIONS);
+use vars qw($deferred_result_FDF_OPTIONS);
 use Data::Dumper;
 use Parse::RecDescent;
 use IO::File;
@@ -20,8 +20,6 @@ PDF::FDF::Simple->mk_accessors(qw(
                                      attribute_ufile
                                      attribute_id
                                 ));
-
-$VERSION = '0.22';
 
 #Parse::RecDescent environment variables: enable for Debugging
 #$::RD_TRACE = 1;
