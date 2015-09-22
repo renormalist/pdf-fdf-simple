@@ -1,8 +1,11 @@
 {{$NEXT}}
   - write out form values without whitespace, this seems to fix
     reported problems with some Acrobat tools
-
   - some more tests with user reported forms
+  - migrated distribution from using Module::Build to now use
+    EU::MakeMaker (via Dist::Zilla)
+  - depend on newer Parse::RecDescent version to avoid intermediate
+    problems
 
 0.21      2009-05-07
 
